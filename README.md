@@ -2,6 +2,8 @@
 
 A secure, privacy-focused web application for removing metadata from files. All processing happens client-side in your browser - no files are uploaded to any server.
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/argonqq)
+
 ## Screenshots
 
 ### Landing Page

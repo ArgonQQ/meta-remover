@@ -35,6 +35,17 @@ class MetadataRemover {
         const files = Array.from(fileList);
         
         for (const file of files) {
+            // Check if it's a HEIC/HEIF file and reject it
+            const isHEIC = file.name.toLowerCase().endsWith('.heic') || 
+                           file.name.toLowerCase().endsWith('.heif') ||
+                           file.type === 'image/heic' || 
+                           file.type === 'image/heif';
+            
+            if (isHEIC) {
+                alert(`HEIC format is not supported. Please convert "${file.name}" to JPEG or PNG first.`);
+                continue;
+            }
+            
             // Create a safe ID without special characters
             const fileId = `file_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
             this.files.set(fileId, {
@@ -47,7 +58,9 @@ class MetadataRemover {
             await this.analyzeFile(fileId);
         }
 
-        document.getElementById('filesSection').style.display = 'block';
+        if (this.files.size > 0) {
+            document.getElementById('filesSection').style.display = 'block';
+        }
     }
 
     renderFileCard(fileId) {
@@ -380,7 +393,19 @@ class MetadataRemover {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = new Image();
+                
+                img.onerror = () => {
+                    console.warn(`Cannot process ${file.name} - unsupported format or corrupted file`);
+                    resolve(file);
+                };
+                
+                const timeout = setTimeout(() => {
+                    console.warn(`Timeout processing ${file.name}`);
+                    resolve(file);
+                }, 10000);
+                
                 img.onload = () => {
+                    clearTimeout(timeout);
                     const canvas = document.createElement('canvas');
                     canvas.width = img.width;
                     canvas.height = img.height;
@@ -389,6 +414,10 @@ class MetadataRemover {
                     ctx.drawImage(img, 0, 0);
                     
                     canvas.toBlob((blob) => {
+                        if (!blob) {
+                            resolve(file);
+                            return;
+                        }
                         const cleanedFile = new File([blob], file.name, {
                             type: file.type,
                             lastModified: Date.now()
@@ -398,6 +427,12 @@ class MetadataRemover {
                 };
                 img.src = e.target.result;
             };
+            
+            reader.onerror = () => {
+                console.error(`Error reading ${file.name}`);
+                resolve(file);
+            };
+            
             reader.readAsDataURL(file);
         });
     }
