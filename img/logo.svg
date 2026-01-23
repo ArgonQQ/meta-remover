@@ -1,0 +1,27 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield background -->
+  <path d="M60 10L20 30V55C20 75 35 92 60 110C85 92 100 75 100 55V30L60 10Z" fill="url(#gradient1)" stroke="#8b5cf6" stroke-width="3"/>
+  
+  <!-- Lock body -->
+  <rect x="45" y="55" width="30" height="25" rx="3" fill="#ffffff" stroke="#8b5cf6" stroke-width="2.5"/>
+  
+  <!-- Lock shackle -->
+  <path d="M50 55V45C50 39.5 54.5 35 60 35C65.5 35 70 39.5 70 45V55" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Keyhole -->
+  <circle cx="60" cy="65" r="3" fill="#8b5cf6"/>
+  <rect x="58.5" y="65" width="3" height="8" rx="1.5" fill="#8b5cf6"/>
+  
+  <!-- Sparkle effects -->
+  <circle cx="35" cy="45" r="2" fill="#a78bfa" opacity="0.8"/>
+  <circle cx="85" cy="50" r="2.5" fill="#a78bfa" opacity="0.8"/>
+  <circle cx="40" cy="70" r="1.5" fill="#c4b5fd" opacity="0.6"/>
+  <circle cx="80" cy="75" r="2" fill="#c4b5fd" opacity="0.6"/>
+  
+  <defs>
+    <linearGradient id="gradient1" x1="20" y1="10" x2="100" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+</svg>
